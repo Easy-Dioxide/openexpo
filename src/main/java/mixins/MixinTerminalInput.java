@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.ui.terminal.TerminalTheme;
+import com.dioxideliteng.ui.terminal.TerminalTheme;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EditBox.class)
 public abstract class MixinTerminalInput {
    @Inject(method = "extractWidgetRenderState", at = @At("HEAD"))
-   private void samsara$input(GuiGraphicsExtractor graphics, int mx, int my, float delta, CallbackInfo ci) {
+   private void dioxideliteng$input(GuiGraphicsExtractor graphics, int mx, int my, float delta, CallbackInfo ci) {
       if (!TerminalTheme.active()) return;
       EditBox box = (EditBox)(Object)this;
       TerminalTheme.input(box);

@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.module.FeatureManager;
+import com.dioxideliteng.module.FeatureManager;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Hud;
@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin({Hud.class})
 public class MixinHud {
    @Inject(method="extractEffects",at=@At("HEAD"),cancellable=true)
-   private void samsara$replacePotionEffects(GuiGraphicsExtractor graphics, DeltaTracker delta, CallbackInfo callback) {
-      if (com.samsara.module.visual.Hud.enabled(com.samsara.module.visual.Hud.Widget.POTION_STATUS)) callback.cancel();
+   private void dioxideliteng$replacePotionEffects(GuiGraphicsExtractor graphics, DeltaTracker delta, CallbackInfo callback) {
+      if (com.dioxideliteng.module.visual.Hud.enabled(com.dioxideliteng.module.visual.Hud.Widget.POTION_STATUS)) callback.cancel();
    }
 
    @ModifyArg(
@@ -25,8 +25,8 @@ public class MixinHud {
       ),
       index = 3
    )
-   private int samsara$offsetScoreboardBottom(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetY();
+   private int dioxideliteng$offsetScoreboardBottom(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetY();
    }
 
    @ModifyArg(
@@ -37,8 +37,8 @@ public class MixinHud {
       ),
       index = 1
    )
-   private int samsara$offsetScoreboardTop(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetY();
+   private int dioxideliteng$offsetScoreboardTop(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetY();
    }
 
    @ModifyArg(
@@ -49,15 +49,15 @@ public class MixinHud {
       ),
       index = 0
    )
-   private int samsara$offsetScoreboardLeft(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetX();
+   private int dioxideliteng$offsetScoreboardLeft(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetX();
    }
 
-   private int samsara$scoreboardOffsetX() {
+   private int dioxideliteng$scoreboardOffsetX() {
       return FeatureManager.scoreboard.isEnabled() ? (int)FeatureManager.scoreboard.x.getValue() : 0;
    }
 
-   private int samsara$scoreboardOffsetY() {
+   private int dioxideliteng$scoreboardOffsetY() {
       return FeatureManager.scoreboard.isEnabled() ? (int)FeatureManager.scoreboard.y.getValue() : 0;
    }
 
@@ -69,8 +69,8 @@ public class MixinHud {
       ),
       index = 2
    )
-   private int samsara$offsetScoreboardRight(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetX();
+   private int dioxideliteng$offsetScoreboardRight(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetX();
    }
 
    @ModifyArg(
@@ -81,8 +81,8 @@ public class MixinHud {
       ),
       index = 2
    )
-   private int samsara$offsetScoreboardTextX(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetX();
+   private int dioxideliteng$offsetScoreboardTextX(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetX();
    }
 
    @ModifyArg(
@@ -93,7 +93,7 @@ public class MixinHud {
       ),
       index = 3
    )
-   private int samsara$offsetScoreboardTextY(int coordinate) {
-      return coordinate - this.samsara$scoreboardOffsetY();
+   private int dioxideliteng$offsetScoreboardTextY(int coordinate) {
+      return coordinate - this.dioxideliteng$scoreboardOffsetY();
    }
 }

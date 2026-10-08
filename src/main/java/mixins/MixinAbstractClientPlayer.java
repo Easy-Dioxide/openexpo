@@ -1,7 +1,7 @@
 package mixins;
 
-import com.samsara.module.FeatureManager;
-import com.samsara.util.ModTextures;
+import com.dioxideliteng.module.FeatureManager;
+import com.dioxideliteng.util.ModTextures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.ClientAsset.ResourceTexture;
@@ -25,32 +25,32 @@ public class MixinAbstractClientPlayer {
    private static final String SKY_LABEL = "Sky";
    private static final String CRYPTIX_LABEL = "Cryptix";
    private static final String CAPE4_PNG_LABEL = "cape4.png";
-   private static final String SAMSARA_LABEL = "samsara";
+   private static final String DioxideLiteNG_LABEL = "dioxideliteng";
    private static final String CAPE_PNG_LABEL = "cape.png";
    private static final String CAPE3_LABEL = "cape3";
    private static final String PUSHY_LABEL = "Pushy";
 
    @Unique
    private static final Texture skyCapeTexture = new ResourceTexture(
-      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.SAMSARA_LABEL, MixinAbstractClientPlayer.CAPE4_LABEL),
-      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.SAMSARA_LABEL, MixinAbstractClientPlayer.CAPE4_PNG_LABEL)
+      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.DioxideLiteNG_LABEL, MixinAbstractClientPlayer.CAPE4_LABEL),
+      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.DioxideLiteNG_LABEL, MixinAbstractClientPlayer.CAPE4_PNG_LABEL)
    );
    @Unique
    private static final Texture cryptixCapeTexture = new ResourceTexture(
-      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.SAMSARA_LABEL, CAPE_LABEL),
-      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.SAMSARA_LABEL, MixinAbstractClientPlayer.CAPE_PNG_LABEL)
+      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.DioxideLiteNG_LABEL, CAPE_LABEL),
+      Identifier.fromNamespaceAndPath(MixinAbstractClientPlayer.DioxideLiteNG_LABEL, MixinAbstractClientPlayer.CAPE_PNG_LABEL)
    );
    @Unique
-   private static final Texture catCapeTexture = new ResourceTexture(Identifier.fromNamespaceAndPath(SAMSARA_LABEL, CAPE2_LABEL), Identifier.fromNamespaceAndPath(SAMSARA_LABEL, CAPE2_PNG_LABEL));
+   private static final Texture catCapeTexture = new ResourceTexture(Identifier.fromNamespaceAndPath(DioxideLiteNG_LABEL, CAPE2_LABEL), Identifier.fromNamespaceAndPath(DioxideLiteNG_LABEL, CAPE2_PNG_LABEL));
    @Unique
-   private static final Texture pushyCapeTexture = new ResourceTexture(Identifier.fromNamespaceAndPath(SAMSARA_LABEL, CAPE3_LABEL), Identifier.fromNamespaceAndPath(SAMSARA_LABEL, CAPE3_PNG_LABEL));
+   private static final Texture pushyCapeTexture = new ResourceTexture(Identifier.fromNamespaceAndPath(DioxideLiteNG_LABEL, CAPE3_LABEL), Identifier.fromNamespaceAndPath(DioxideLiteNG_LABEL, CAPE3_PNG_LABEL));
 
    @Inject(
       method = {"getSkin"},
       at = {@At("RETURN")},
       cancellable = true
    )
-   private void samsara$overrideCape(CallbackInfoReturnable<PlayerSkin> callback) {
+   private void dioxideliteng$overrideCape(CallbackInfoReturnable<PlayerSkin> callback) {
       AbstractClientPlayer player = (AbstractClientPlayer)(Object)this;
       if (player == Minecraft.getInstance().player) {
          if (FeatureManager.cape.isEnabled()) {

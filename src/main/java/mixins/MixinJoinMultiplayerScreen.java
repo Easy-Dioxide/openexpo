@@ -1,7 +1,7 @@
 package mixins;
 
-import com.samsara.ui.account.AccountLoginScreen;
-import com.samsara.ui.account.AccountManagerScreen;
+import com.dioxideliteng.ui.account.AccountLoginScreen;
+import com.dioxideliteng.ui.account.AccountManagerScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ public class MixinJoinMultiplayerScreen {
       method = {"init"},
       at = {@At("TAIL")}
    )
-   private void samsara$addTokenLoginButton(CallbackInfo callback) {
+   private void dioxideliteng$addTokenLoginButton(CallbackInfo callback) {
       JoinMultiplayerScreen parent = (JoinMultiplayerScreen)(Object)this;
       ((ScreenAccessor)parent)
          .invokeAddRenderableWidget(

@@ -6,5 +6,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(RealmsClient.class)
 public interface RealmsSessionAccessor {
-   @Accessor("realmsClientInstance") static void samsara$reset(RealmsClient client) { throw new AssertionError(); }
+   @Accessor("realmsClientInstance") static void dioxideliteng$reset(RealmsClient client) { throw new AssertionError(); }
 }

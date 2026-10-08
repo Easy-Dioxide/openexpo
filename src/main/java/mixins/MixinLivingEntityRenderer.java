@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.event.Events;
+import com.dioxideliteng.event.Events;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -22,7 +22,7 @@ public class MixinLivingEntityRenderer<T extends LivingEntity, S extends LivingE
          shift = Shift.AFTER
       )}
    )
-   private void samsara$extractManagedRotation(LivingEntity target, LivingEntityRenderState renderState, float partialTick, CallbackInfo callback) {
+   private void dioxideliteng$extractManagedRotation(LivingEntity target, LivingEntityRenderState renderState, float partialTick, CallbackInfo callback) {
       if (target == Minecraft.getInstance().player) {
          renderState.xRot = Mth.rotLerp(partialTick, Events.ROTATION.getPreviousPitch(), Events.ROTATION.getPitch());
       }

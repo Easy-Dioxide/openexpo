@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.ui.mainmenu.screen.SamsaraTitleScreen;
+import com.dioxideliteng.ui.mainmenu.screen.DioxideLiteNGTitleScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinTitleScreen {
 
    @Inject(method = "init", at = @At("HEAD"), cancellable = true)
-   private void samsara$showTerminalTitle(CallbackInfo callbackInfo) {
+   private void dioxideliteng$showTerminalTitle(CallbackInfo callbackInfo) {
       Minecraft mc = Minecraft.getInstance();
-      if (!(mc.gui.screen() instanceof SamsaraTitleScreen)) {
-         mc.gui.setScreen(new SamsaraTitleScreen());
+      if (!(mc.gui.screen() instanceof DioxideLiteNGTitleScreen)) {
+         mc.gui.setScreen(new DioxideLiteNGTitleScreen());
       }
       callbackInfo.cancel();
    }

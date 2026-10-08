@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(RealmsAvailability.class)
 public interface RealmsAvailabilityAccessor {
-   @Accessor("future") static void samsara$reset(CompletableFuture<RealmsAvailability.Result> future) { throw new AssertionError(); }
+   @Accessor("future") static void dioxideliteng$reset(CompletableFuture<RealmsAvailability.Result> future) { throw new AssertionError(); }
 }

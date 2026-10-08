@@ -1,13 +1,13 @@
 package mixins;
 
-import com.samsara.module.FeatureManager;
-import com.samsara.ui.dynamicIsland.DynamicIslandManager;
-import com.samsara.ui.NanoGui;
-import com.samsara.ui.loading.SamsaraLoadingState;
-import com.samsara.ui.mainmenu.launch.LaunchResources;
-import com.samsara.ui.mainmenu.screen.RockstarTitleScreen;
-import com.samsara.util.render.NVGRenderer;
-import com.samsara.util.render.HudBackdrop;
+import com.dioxideliteng.module.FeatureManager;
+import com.dioxideliteng.ui.dynamicIsland.DynamicIslandManager;
+import com.dioxideliteng.ui.NanoGui;
+import com.dioxideliteng.ui.loading.DioxideLiteNGLoadingState;
+import com.dioxideliteng.ui.mainmenu.launch.LaunchResources;
+import com.dioxideliteng.ui.mainmenu.screen.RockstarTitleScreen;
+import com.dioxideliteng.util.render.NVGRenderer;
+import com.dioxideliteng.util.render.HudBackdrop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.render.GuiRenderer;
 import net.minecraft.client.gui.screens.LoadingOverlay;
@@ -23,17 +23,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinGuiRenderer {
 
    private static boolean logged;
-   @Unique private boolean samsara$islandBehindContainer;
+   @Unique private boolean dioxideliteng$islandBehindContainer;
 
    @Inject(method = "render", at = @At("HEAD"))
-   private void samsara$prepareHudBackdrop(CallbackInfo callbackInfo) {
-      this.samsara$islandBehindContainer = false;
+   private void dioxideliteng$prepareHudBackdrop(CallbackInfo callbackInfo) {
+      this.dioxideliteng$islandBehindContainer = false;
       HudBackdrop.prepare();
-      this.samsara$renderIslandBeforeContainer();
+      this.dioxideliteng$renderIslandBeforeContainer();
    }
 
    @Unique
-   private void samsara$renderIslandBeforeContainer() {
+   private void dioxideliteng$renderIslandBeforeContainer() {
       Screen current = Minecraft.getInstance().gui.screen();
       if (!(current instanceof AbstractContainerScreen<?>) || !NVGRenderer.isAvailable()
           || !DynamicIslandManager.shouldRender(current)) return;
@@ -43,7 +43,7 @@ public class MixinGuiRenderer {
             // Draw before prepare() renders the inventory avatar into its small PIP target.
             // The container gradient then covers the island without saving a PIP viewport.
             DynamicIslandManager.renderNano();
-            this.samsara$islandBehindContainer = true;
+            this.dioxideliteng$islandBehindContainer = true;
          }
       } finally {
          if (started) {
@@ -54,25 +54,25 @@ public class MixinGuiRenderer {
    }
 
    @Inject(method = "close", at = @At("HEAD"))
-   private void samsara$closeHudBackdrop(CallbackInfo callbackInfo) {
+   private void dioxideliteng$closeHudBackdrop(CallbackInfo callbackInfo) {
       HudBackdrop.close();
    }
 
    @Inject(method = "endFrame", at = @At("TAIL"))
-   private void samsara$renderNanoGui(CallbackInfo callbackInfo) {
-      boolean hud = FeatureManager.hud != null && (FeatureManager.hud.isEnabled() || com.samsara.ui.hud.editor.HudEditorScreen.active());
+   private void dioxideliteng$renderNanoGui(CallbackInfo callbackInfo) {
+      boolean hud = FeatureManager.hud != null && (FeatureManager.hud.isEnabled() || com.dioxideliteng.ui.hud.editor.HudEditorScreen.active());
       Minecraft mc = Minecraft.getInstance();
       Screen current = mc == null ? null : mc.gui.screen();
       boolean gui = current instanceof NanoGui && NVGRenderer.isAvailable();
       boolean title = current instanceof RockstarTitleScreen && NVGRenderer.isAvailable();
       boolean loading = mc != null && mc.gui.overlay() instanceof LoadingOverlay && NVGRenderer.isAvailable();
-      boolean island = !this.samsara$islandBehindContainer && NVGRenderer.isAvailable() && DynamicIslandManager.shouldRender(current);
+      boolean island = !this.dioxideliteng$islandBehindContainer && NVGRenderer.isAvailable() && DynamicIslandManager.shouldRender(current);
       boolean chestOverlay = NVGRenderer.isAvailable() && DynamicIslandManager.hasChestOverlay();
       if (!hud && !gui && !title && !loading && !island && !chestOverlay) {
          if (!logged) {
             logged = true;
-            org.slf4j.LoggerFactory.getLogger("samsara-nvg").info(
-               "[samsara] nano hud skipped (module {})",
+            org.slf4j.LoggerFactory.getLogger("dioxideliteng-nvg").info(
+               "[dioxideliteng] nano hud skipped (module {})",
                FeatureManager.hud == null ? "null" : "disabled");
          }
          return;
@@ -88,26 +88,26 @@ public class MixinGuiRenderer {
             if (gui) {
                ((NanoGui) current).renderNano();
                if (mc.gui.screen() == current) {
-                  if (current instanceof com.samsara.ui.clickgui.opai.OpaiClickGuiScreen opai) opai.drawHudEditButton();
-                  else if (current instanceof com.samsara.ui.clickgui.RockstarClickGuiScreen modern) modern.drawHudEditButton();
+                  if (current instanceof com.dioxideliteng.ui.clickgui.opai.OpaiClickGuiScreen opai) opai.drawHudEditButton();
+                  else if (current instanceof com.dioxideliteng.ui.clickgui.RockstarClickGuiScreen modern) modern.drawHudEditButton();
                }
             }
             if (title) {
                ((RockstarTitleScreen) current).renderNano();
             }
             if (loading) {
-               samsara$drawLoading(mc);
+               dioxideliteng$drawLoading(mc);
             }
             if (island) {
                DynamicIslandManager.renderNano();
             }
             if (chestOverlay) DynamicIslandManager.renderChestOverlay();
-            if (current instanceof com.samsara.ui.hud.editor.HudEditorScreen editor) editor.renderOutline();
+            if (current instanceof com.dioxideliteng.ui.hud.editor.HudEditorScreen editor) editor.renderOutline();
          }
          if (!logged) {
             logged = true;
-            org.slf4j.LoggerFactory.getLogger("samsara-nvg").info(
-               "[samsara] nano hud frame started={}, available={}",
+            org.slf4j.LoggerFactory.getLogger("dioxideliteng-nvg").info(
+               "[dioxideliteng] nano hud frame started={}, available={}",
                started, NVGRenderer.isAvailable());
          }
       } finally {
@@ -118,10 +118,10 @@ public class MixinGuiRenderer {
       }
    }
 
-   private static void samsara$drawLoading(Minecraft mc) {
+   private static void dioxideliteng$drawLoading(Minecraft mc) {
       float width = mc.getWindow().getGuiScaledWidth();
       float height = mc.getWindow().getGuiScaledHeight();
       LaunchResources.renderer().loading(width, height,
-         SamsaraLoadingState.done ? 1 : SamsaraLoadingState.progress, System.nanoTime() / 1_000_000_000.0);
+         DioxideLiteNGLoadingState.done ? 1 : DioxideLiteNGLoadingState.progress, System.nanoTime() / 1_000_000_000.0);
    }
 }

@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.command.CommandManager;
+import com.dioxideliteng.command.CommandManager;
 import net.minecraft.client.gui.screens.ChatScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +21,7 @@ public class MixinChatScreen {
       )},
       cancellable = true
    )
-   private void samsara$handleClientCommand(String message, boolean addToHistory, CallbackInfo callback) {
+   private void dioxideliteng$handleClientCommand(String message, boolean addToHistory, CallbackInfo callback) {
       CommandManager.dispatch(message);
       if (message.startsWith(COMMAND_PREFIX)) {
          callback.cancel();

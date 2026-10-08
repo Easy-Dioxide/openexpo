@@ -1,7 +1,7 @@
 package mixins;
 
-import com.samsara.command.Command;
-import com.samsara.command.CommandManager;
+import com.dioxideliteng.command.Command;
+import com.dioxideliteng.command.CommandManager;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.StringReader;
@@ -39,7 +39,7 @@ public class MixinCommandSuggestions {
       at = @At("STORE"),
       ordinal = 0
    )
-   private StringReader samsara$parseClientCommand(StringReader reader) {
+   private StringReader dioxideliteng$parseClientCommand(StringReader reader) {
       if (this.input.getValue().startsWith(COMMAND_PREFIX) && reader.canRead() && reader.peek() == '.') {
          reader.skip();
       }
@@ -52,7 +52,7 @@ public class MixinCommandSuggestions {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$formatClientCommand(String commandLine, int cursor, CallbackInfoReturnable callback) {
+   private void dioxideliteng$formatClientCommand(String commandLine, int cursor, CallbackInfoReturnable callback) {
       if (this.input.getValue().startsWith(COMMAND_PREFIX)) {
          callback.setReturnValue(FormattedCharSequence.forward(commandLine, Style.EMPTY.withColor(ChatFormatting.GRAY)));
       }
@@ -65,7 +65,7 @@ public class MixinCommandSuggestions {
          target = "Lcom/mojang/brigadier/CommandDispatcher;getCompletionSuggestions(Lcom/mojang/brigadier/ParseResults;I)Ljava/util/concurrent/CompletableFuture;"
       )
    )
-   private CompletableFuture samsara$suggestClientCommands(CommandDispatcher dispatcher, ParseResults parseResults, int cursor) {
+   private CompletableFuture dioxideliteng$suggestClientCommands(CommandDispatcher dispatcher, ParseResults parseResults, int cursor) {
       String inputName = this.input.getValue();
       if (!inputName.startsWith(COMMAND_PREFIX)) {
          return dispatcher.getCompletionSuggestions(parseResults, cursor);
@@ -114,7 +114,7 @@ public class MixinCommandSuggestions {
       at = @At("STORE"),
       ordinal = 1
    )
-   private boolean samsara$includeClientCommands(boolean original) {
+   private boolean dioxideliteng$includeClientCommands(boolean original) {
       return original || this.input.getValue().startsWith(COMMAND_PREFIX);
    }
 }

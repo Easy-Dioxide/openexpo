@@ -1,9 +1,9 @@
 package mixins;
 
-import com.samsara.ClientBranding;
-import com.samsara.event.Events;
-import com.samsara.module.FeatureManager;
-import com.samsara.ui.mainmenu.window.WindowBranding;
+import com.dioxideliteng.ClientBranding;
+import com.dioxideliteng.event.Events;
+import com.dioxideliteng.module.FeatureManager;
+import com.dioxideliteng.ui.mainmenu.window.WindowBranding;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At.Shift;
@@ -17,12 +17,12 @@ public class MixinMinecraft {
    private boolean modulesInitialized = false;
 
    @Inject(method = "createTitle", at = @At("HEAD"), cancellable = true)
-   private void samsara$windowTitle(CallbackInfoReturnable<String> callback) {
+   private void dioxideliteng$windowTitle(CallbackInfoReturnable<String> callback) {
       callback.setReturnValue(ClientBranding.WINDOW_TITLE);
    }
 
    @Inject(method = "<init>", at = @At("TAIL"))
-   private void samsara$windowIcon(CallbackInfo callback) {
+   private void dioxideliteng$windowIcon(CallbackInfo callback) {
       WindowBranding.applyIcon(((Minecraft)(Object)this).getWindow().handle());
    }
 
@@ -30,10 +30,10 @@ public class MixinMinecraft {
       method = {"onResourceLoadFinished"},
       at = {@At("TAIL")}
    )
-   private void samsara$initializeModules(CallbackInfo callback) {
+   private void dioxideliteng$initializeModules(CallbackInfo callback) {
       if (!this.modulesInitialized) {
          FeatureManager.loadEnabled();
-         com.samsara.config.ConfigManager.loadState();
+         com.dioxideliteng.config.ConfigManager.loadState();
          this.modulesInitialized = true;
       }
    }
@@ -46,24 +46,24 @@ public class MixinMinecraft {
          shift = Shift.AFTER
       )}
    )
-   private void samsara$dispatchTick(CallbackInfo callback) {
+   private void dioxideliteng$dispatchTick(CallbackInfo callback) {
       Events.TICK.call();
    }
 
    @Inject(method = "tick", at = @At("TAIL"))
-   private void samsara$trackSessionAndSave(CallbackInfo callback) {
+   private void dioxideliteng$trackSessionAndSave(CallbackInfo callback) {
       FeatureManager.clientTickEnd();
-      com.samsara.config.ConfigManager.tick();
+      com.dioxideliteng.config.ConfigManager.tick();
    }
 
    @Inject(method = "tick", at = @At("HEAD"))
-   private void samsara$initializeRestoredWorldModules(CallbackInfo callback) {
+   private void dioxideliteng$initializeRestoredWorldModules(CallbackInfo callback) {
       if (this.modulesInitialized) FeatureManager.clientTick();
    }
 
    @Inject(method = "close", at = @At("HEAD"))
-   private void samsara$flushState(CallbackInfo callback) {
-      com.samsara.config.ConfigManager.flush();
-      com.samsara.util.render.NVGRenderer.close();
+   private void dioxideliteng$flushState(CallbackInfo callback) {
+      com.dioxideliteng.config.ConfigManager.flush();
+      com.dioxideliteng.util.render.NVGRenderer.close();
    }
 }

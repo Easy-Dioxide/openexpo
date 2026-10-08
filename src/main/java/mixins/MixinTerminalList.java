@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.ui.terminal.TerminalTheme;
+import com.dioxideliteng.ui.terminal.TerminalTheme;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractSelectionList;
 import net.minecraft.client.gui.layouts.LayoutElement;
@@ -14,15 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractSelectionList.class)
 public abstract class MixinTerminalList {
    @Inject(method = {"extractListBackground", "extractListSeparators"}, at = @At("HEAD"), cancellable = true)
-   private void samsara$background(GuiGraphicsExtractor graphics, CallbackInfo ci) {
+   private void dioxideliteng$background(GuiGraphicsExtractor graphics, CallbackInfo ci) {
       if (TerminalTheme.active()) ci.cancel();
    }
    @Inject(method = "extractSelection", at = @At("HEAD"), cancellable = true)
-   private void samsara$selection(GuiGraphicsExtractor graphics, @Coerce Object entry, int color, CallbackInfo ci) {
+   private void dioxideliteng$selection(GuiGraphicsExtractor graphics, @Coerce Object entry, int color, CallbackInfo ci) {
       if (TerminalTheme.active()) ci.cancel();
    }
    @Inject(method = "extractItem", at = @At("HEAD"))
-   private void samsara$row(GuiGraphicsExtractor graphics, int mx, int my, float delta, @Coerce Object entry, CallbackInfo ci) {
+   private void dioxideliteng$row(GuiGraphicsExtractor graphics, int mx, int my, float delta, @Coerce Object entry, CallbackInfo ci) {
       if (!TerminalTheme.active()) return;
       AbstractSelectionList<?> list = (AbstractSelectionList<?>)(Object)this;
       var e = (LayoutElement)entry;

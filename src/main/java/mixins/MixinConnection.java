@@ -1,9 +1,9 @@
 package mixins;
 
-import com.samsara.event.impl.EventPacketReceive;
-import com.samsara.event.impl.EventPacketSend;
-import com.samsara.util.PacketBlinkQueue;
-import com.samsara.util.PacketFilter;
+import com.dioxideliteng.event.impl.EventPacketReceive;
+import com.dioxideliteng.event.impl.EventPacketSend;
+import com.dioxideliteng.util.PacketBlinkQueue;
+import com.dioxideliteng.util.PacketFilter;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.Connection;
@@ -22,7 +22,7 @@ public class MixinConnection {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$dispatchPacketSend(Packet packet, ChannelFutureListener listener, boolean flush, CallbackInfo callback) {
+   private void dioxideliteng$dispatchPacketSend(Packet packet, ChannelFutureListener listener, boolean flush, CallbackInfo callback) {
       EventPacketSend packetSendEvent = new EventPacketSend(packet);
       packetSendEvent.call();
       if (packetSendEvent.isCancelled()) {
@@ -35,8 +35,8 @@ public class MixinConnection {
          if (PacketFilter.isRedundant(packetSendEvent.getPacket())) {
             callback.cancel();
          }
-         if (!callback.isCancelled() && com.samsara.module.FeatureManager.autoRod != null) {
-            com.samsara.module.FeatureManager.autoRod.observePacket(packetSendEvent.getPacket());
+         if (!callback.isCancelled() && com.dioxideliteng.module.FeatureManager.autoRod != null) {
+            com.dioxideliteng.module.FeatureManager.autoRod.observePacket(packetSendEvent.getPacket());
          }
       }
    }
@@ -46,7 +46,7 @@ public class MixinConnection {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$dispatchPacketReceive(ChannelHandlerContext channelContext, Packet packet, CallbackInfo callback) {
+   private void dioxideliteng$dispatchPacketReceive(ChannelHandlerContext channelContext, Packet packet, CallbackInfo callback) {
       EventPacketReceive packetReceiveEvent = new EventPacketReceive(packet);
       packetReceiveEvent.call();
       if (packet instanceof ClientboundDisconnectPacket || packet instanceof ClientboundStartConfigurationPacket) {

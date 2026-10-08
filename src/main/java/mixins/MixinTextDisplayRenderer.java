@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.module.visual.NameTags;
+import com.dioxideliteng.module.visual.NameTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.DisplayRenderer;
@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinTextDisplayRenderer {
    @Inject(method = "submitInner(Lnet/minecraft/client/renderer/entity/state/TextDisplayEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IF)V",
       at = @At("HEAD"), cancellable = true)
-   private void samsara$replaceFloatingText(TextDisplayEntityRenderState state, PoseStack pose,
+   private void dioxideliteng$replaceFloatingText(TextDisplayEntityRenderState state, PoseStack pose,
       SubmitNodeCollector collector, int light, float partial, CallbackInfo ci) {
-      if (((NameTags.ReplacementState)state).samsara$replaceNameTag()) ci.cancel();
+      if (((NameTags.ReplacementState)state).dioxideliteng$replaceNameTag()) ci.cancel();
    }
 }

@@ -1,6 +1,0 @@
-{
-  "providers": [
-    { "type": "ttf", "file": "samsara:agibot-display.ttf", "size": 20, "oversample": 3 },
-    { "type": "reference", "id": "samsara:terminal" }
-  ]
-}

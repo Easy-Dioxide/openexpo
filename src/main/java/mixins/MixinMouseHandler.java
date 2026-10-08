@@ -1,8 +1,8 @@
 package mixins;
 
-import com.samsara.event.Events;
-import com.samsara.event.impl.EventMouseButton;
-import com.samsara.module.FeatureManager;
+import com.dioxideliteng.event.Events;
+import com.dioxideliteng.event.impl.EventMouseButton;
+import com.dioxideliteng.module.FeatureManager;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -21,20 +21,20 @@ public class MixinMouseHandler {
    @Shadow @Final private Minecraft minecraft;
    @Shadow @Final private SmoothDouble smoothTurnX;
    @Shadow @Final private SmoothDouble smoothTurnY;
-   @Unique private CameraType samsara$cameraType;
-   @Unique private Object samsara$player;
-   @Unique private boolean samsara$scaffold;
+   @Unique private CameraType dioxideliteng$cameraType;
+   @Unique private Object dioxideliteng$player;
+   @Unique private boolean dioxideliteng$scaffold;
 
    @Inject(method = "handleAccumulatedMovement", at = @At("HEAD"))
-   private void samsara$clearCameraFilter(CallbackInfo callback) {
+   private void dioxideliteng$clearCameraFilter(CallbackInfo callback) {
       CameraType camera = this.minecraft.options.getCameraType();
       boolean scaffold = FeatureManager.scaffold != null && FeatureManager.scaffold.isEnabled();
-      boolean changed = this.samsara$cameraType != camera || this.samsara$player != this.minecraft.player
-         || this.samsara$scaffold != scaffold;
+      boolean changed = this.dioxideliteng$cameraType != camera || this.dioxideliteng$player != this.minecraft.player
+         || this.dioxideliteng$scaffold != scaffold;
       if (changed) {
          this.smoothTurnX.reset();
          this.smoothTurnY.reset();
-         if (scaffold || this.samsara$scaffold) {
+         if (scaffold || this.dioxideliteng$scaffold) {
             this.minecraft.options.smoothCamera = false;
             if (this.minecraft.player != null) {
                this.minecraft.player.yRotO = this.minecraft.player.getYRot();
@@ -42,15 +42,15 @@ public class MixinMouseHandler {
             }
          }
       }
-      this.samsara$cameraType = camera;
-      this.samsara$player = this.minecraft.player;
-      this.samsara$scaffold = scaffold;
+      this.dioxideliteng$cameraType = camera;
+      this.dioxideliteng$player = this.minecraft.player;
+      this.dioxideliteng$scaffold = scaffold;
    }
    @Inject(
       method = {"onButton"},
       at = {@At("HEAD")}
    )
-   private void samsara$dispatchMouseButton(long windowHandle, MouseButtonInfo buttonInfo, int action, CallbackInfo callback) {
+   private void dioxideliteng$dispatchMouseButton(long windowHandle, MouseButtonInfo buttonInfo, int action, CallbackInfo callback) {
       EventMouseButton mouseButtonEvent = Events.MOUSE_BUTTON.reset(buttonInfo.button(), action, buttonInfo.modifiers());
       mouseButtonEvent.call();
       // Let MouseHandler continue into Minecraft's Screen dispatch. Cancelling

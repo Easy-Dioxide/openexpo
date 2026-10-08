@@ -1,7 +1,7 @@
 package mixins;
 
-import com.samsara.event.Events;
-import com.samsara.event.impl.EventSound;
+import com.dioxideliteng.event.Events;
+import com.dioxideliteng.event.impl.EventSound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.client.sounds.SoundEngine.PlayResult;
@@ -17,7 +17,7 @@ public class MixinSoundEngine {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$dispatchSound(SoundInstance sound, CallbackInfoReturnable callback) {
+   private void dioxideliteng$dispatchSound(SoundInstance sound, CallbackInfoReturnable callback) {
       EventSound soundEvent = Events.SOUND.reset(sound.getIdentifier());
       soundEvent.call();
       if (soundEvent.isCancelled()) {

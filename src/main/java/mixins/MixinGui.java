@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.event.Events;
+import com.dioxideliteng.event.Events;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
@@ -21,9 +21,9 @@ public class MixinGui {
          shift = Shift.AFTER
       )}
    )
-   private void samsara$dispatchRender2D(DeltaTracker deltaTracker, boolean renderBlockOutline, boolean renderDebug, CallbackInfo callback, @Local GuiGraphicsExtractor graphics) {
-      com.samsara.ui.hud.HudLayouts.INSTANCE.beginFrame();
-      com.samsara.ui.dynamicIsland.DynamicIslandManager.beginExtraction();
+   private void dioxideliteng$dispatchRender2D(DeltaTracker deltaTracker, boolean renderBlockOutline, boolean renderDebug, CallbackInfo callback, @Local GuiGraphicsExtractor graphics) {
+      com.dioxideliteng.ui.hud.HudLayouts.INSTANCE.beginFrame();
+      com.dioxideliteng.ui.dynamicIsland.DynamicIslandManager.beginExtraction();
       Events.RENDER_2D.reset(graphics, deltaTracker).call();
    }
 }

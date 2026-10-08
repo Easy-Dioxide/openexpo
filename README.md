@@ -1,9 +1,9 @@
 <div align="center">
 <p>
-    <img width="200" src="src/main/resources/assets/samsara/icon.png" alt="Samsara logo">
+    <img width="200" src="src/main/resources/assets/dioxideliteng/icon.png" alt="DioxideLiteNG logo">
 </p>
 
-<h1>Samsara Client</h1>
+<h1>DioxideLiteNG Client</h1>
 <p>B1 &middot; Minecraft 26.3 &middot; Fabric &middot; Java 25</p>
 
 [License](#license) |
@@ -13,12 +13,12 @@
 
 </div>
 
-Samsara is a free and open-source mixin-based hacked client for Minecraft, built on Fabric. It combines combat,
+DioxideLiteNG is a free and open-source mixin-based hacked client for Minecraft, built on Fabric. It combines combat,
 movement and player modules with a custom interface, configurable HUDs and local account management.
 
 ## License
 
-Samsara is licensed under the [GNU General Public License v3.0](LICENSE).
+DioxideLiteNG is licensed under the [GNU General Public License v3.0](LICENSE).
 
 You may use, modify and redistribute the project under GPLv3. When distributing a modified
 version, you must provide its corresponding source code and license it under GPLv3.
@@ -26,13 +26,13 @@ Third-party dependencies and assets retain their respective licenses.
 
 ## Setting up a Workspace
 
-Samsara uses the included [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+DioxideLiteNG uses the included [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
 Install a **JDK 25** and configure `JAVA_HOME` to point to it, then open a terminal in the repository root.
 A separate Gradle installation is unnecessary.
 
 ```shell
-git clone https://github.com/ZiLin466/Samsara.git
-cd Samsara
+git clone https://github.com/Dioxide/DioxideLiteNG.git
+cd DioxideLiteNG
 ```
 
 1. Open the repository as a Gradle project in your preferred IDE and select JDK 25 as its Gradle JVM.
@@ -48,7 +48,7 @@ cd Samsara
    .\gradlew.bat build
    ```
 
-   The client JAR is `build/libs/samsara-b1.jar`.
+   The client JAR is `build/libs/dioxideliteng-b1.jar`.
 
 4. Start a development client when needed:
 
@@ -60,7 +60,7 @@ On Linux or macOS, use `./gradlew` in place of `.\gradlew.bat`.
 The first build downloads Gradle, Minecraft and the required dependencies.
 
 JavaFX native libraries are selected for the build machine's operating system. When building
-for another platform, set `-Psamsara.webViewPlatform=win`, `linux`, `mac` or `mac-aarch64` as appropriate.
+for another platform, set `-Pdioxideliteng.webViewPlatform=win`, `linux`, `mac` or `mac-aarch64` as appropriate.
 
 ## Installation
 
@@ -72,7 +72,7 @@ for another platform, set `-Psamsara.webViewPlatform=win`, `linux`, `mac` or `ma
 
 1. Build the client using the workspace instructions above.
 2. Install [Fabric Loader](https://fabricmc.net/use/installer/) for Minecraft 26.3.
-3. Copy `build/libs/samsara-b1.jar` into the `mods` folder of that Minecraft instance.
+3. Copy `build/libs/dioxideliteng-b1.jar` into the `mods` folder of that Minecraft instance.
 4. Launch the Fabric profile with the required Java runtime.
 
 ## Getting Started
@@ -84,15 +84,15 @@ for another platform, set `-Psamsara.webViewPlatform=win`, `linux`, `mac` or `ma
 - Enter `.help` in chat to list commands. Save and load gameplay presets with
   `.config save <name>` and `.config load <name>`.
 
-Automatic state is stored in `samsara/state.json`, and gameplay presets are stored in
-`samsara/configs/`, relative to the active Minecraft game directory.
+Automatic state is stored in `dioxideliteng/state.json`, and gameplay presets are stored in
+`dioxideliteng/configs/`, relative to the active Minecraft game directory.
 
 ## Additional Libraries
 
 ### Mixins
 
 [SpongePowered Mixin](https://github.com/SpongePowered/Mixin/wiki) modifies Minecraft classes
-at runtime. Samsara uses it to connect modules, input handling and rendering to the game
+at runtime. DioxideLiteNG uses it to connect modules, input handling and rendering to the game
 without distributing modified Minecraft classes.
 
 ### Interface and Accounts
@@ -103,4 +103,4 @@ and [JavaFX WebView](https://openjfx.io/) supports the embedded Microsoft login 
 
 ## Support
 
-[Support Samsara](https://catfk.com/shop/samsara)
+[Support DioxideLiteNG](https://catfk.com/shop/dioxideliteng)

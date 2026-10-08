@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.util.TimerController;
+import com.dioxideliteng.util.TimerController;
 import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
 import net.minecraft.client.DeltaTracker.Timer;
 import org.spongepowered.asm.mixin.Mixin;

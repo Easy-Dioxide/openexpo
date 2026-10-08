@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "samsara",
+  "id": "dioxideliteng",
   "version": "${version}",
-  "name": "Samsara",
-  "description": "Samsara client",
+  "name": "DioxideLiteNG",
+  "description": "DioxideLiteNG client",
   "authors": [
-    "Trillionaire"
+    "Dioxide"
   ],
   "contact": {
-    "sources": "https://github.com/ZiLin466/Samsara",
-    "issues": "https://github.com/ZiLin466/Samsara/issues"
+    "sources": "https://github.com/Dioxide/DioxideLiteNG",
+    "issues": "https://github.com/Dioxide/DioxideLiteNG/issues"
   },
   "license": "GPL-3.0-only",
-  "icon": "assets/samsara/icon.png",
+  "icon": "assets/dioxideliteng/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.samsara.SamsaraClient"
+      "com.dioxideliteng.DioxideLiteNGClient"
     ]
   },
   "mixins": [
-    "samsara.mixins.json"
+    "dioxideliteng.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.19.5",

@@ -1,7 +1,7 @@
 package mixins;
 
-import com.samsara.event.Events;
-import com.samsara.module.FeatureManager;
+import com.dioxideliteng.event.Events;
+import com.dioxideliteng.module.FeatureManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
@@ -38,7 +38,7 @@ public abstract class MixinEntity {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$preventSwimming(CallbackInfo callback) {
+   private void dioxideliteng$preventSwimming(CallbackInfo callback) {
       if (FeatureManager.antiSwim.isEnabled()) {
          this.setSwimming(false);
          callback.cancel();

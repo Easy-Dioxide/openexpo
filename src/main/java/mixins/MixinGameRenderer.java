@@ -1,6 +1,6 @@
 package mixins;
 
-import com.samsara.event.Events;
+import com.dioxideliteng.event.Events;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
@@ -16,7 +16,7 @@ public class MixinGameRenderer {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void samsara$dispatchHurtCamera(CameraRenderState cameraRenderState, PoseStack poseStack, CallbackInfo callback) {
+   private void dioxideliteng$dispatchHurtCamera(CameraRenderState cameraRenderState, PoseStack poseStack, CallbackInfo callback) {
       Events.HURT_CAMERA.call();
       if (Events.HURT_CAMERA.isCancelled()) {
          callback.cancel();
